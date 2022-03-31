@@ -21,9 +21,9 @@ namespace aspnet_dotnet_core_api.Controllers
         }
 
         [HttpGet]
-        public string Get(string strCity)
+        public async Task<string> Get(string strCity)
         {   
-            return _weatherService.getWeatherFromWeatherStack(strCity);
+            return await _weatherService.getWeatherFromWeatherStack(strCity);
         }
     }
 }

@@ -7,6 +7,6 @@ namespace aspnet_dotnet_core_api.WeatherStackService.Interfaces
 {
     public interface IWeatherStackService
     {
-        string getWeatherFromWeatherStack(string City);
+        Task<string> getWeatherFromWeatherStack(string City);
     }
 }

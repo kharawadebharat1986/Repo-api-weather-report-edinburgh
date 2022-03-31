@@ -30,7 +30,7 @@ namespace aspnet_dotnet_core_api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddScoped<IWeatherStackService, WeatherStackService.WeatherStackService>();
+            services.AddHttpClient<IWeatherStackService, WeatherStackService.WeatherStackService>();
           //  services.AddAuthentication(AzureADDefaults.JwtBearerAuthenticationScheme)
           //.AddAzureADBearer(options => Configuration.Bind("AzureAd", options));
         }
