@@ -2,8 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using aspnet_dotnet_core_api.WeatherStackService.Interfaces;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.AzureAD.UI;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -26,6 +30,9 @@ namespace aspnet_dotnet_core_api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddScoped<IWeatherStackService, WeatherStackService.WeatherStackService>();
+          //  services.AddAuthentication(AzureADDefaults.JwtBearerAuthenticationScheme)
+          //.AddAzureADBearer(options => Configuration.Bind("AzureAd", options));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -40,7 +47,18 @@ namespace aspnet_dotnet_core_api
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            //app.Use(async (context, next) =>
+            //{
+            //    if (!context.User.Identity?.IsAuthenticated ?? false)
+            //    {
+            //        context.Response.StatusCode = 401;
+            //        await context.Response.WriteAsync("Not Authenticated");
+            //    }
+            //    else
+            //    {
+            //        await next();
+            //    }
+            //});
 
             app.UseEndpoints(endpoints =>
             {

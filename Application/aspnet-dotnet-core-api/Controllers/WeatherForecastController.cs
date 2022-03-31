@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using aspnet_dotnet_core_api.WeatherStackService.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -12,16 +13,17 @@ namespace aspnet_dotnet_core_api.Controllers
     public class WeatherForecastController : ControllerBase
     {
         private readonly ILogger<WeatherForecastController> _logger;
-
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        private readonly IWeatherStackService _weatherService;
+        public WeatherForecastController(ILogger<WeatherForecastController> logger,IWeatherStackService weatherReport)
         {
             _logger = logger;
+            _weatherService = weatherReport;
         }
 
         [HttpGet]
-        public WeatherForecast Get()
-        {
-            return new WeatherForecast() { Date=DateTime.Now, Summary="Weather report", TemperatureC=30};
+        public string Get(string strCity)
+        {   
+            return _weatherService.getWeatherFromWeatherStack(strCity);
         }
     }
 }
